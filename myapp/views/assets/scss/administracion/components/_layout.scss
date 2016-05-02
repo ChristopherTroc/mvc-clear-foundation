@@ -1,0 +1,29 @@
+@each $size in 10, 15, 20, 25, 30, 45, 50, 75, 80, 100, 125, 150, 200, 250, 300, 500{
+  .spacer-#{$size} { height: rem-calc($size); }
+}
+
+body{
+    background: url('../img/fndGeneral.jpg') repeat-x center top;
+}
+
+.movistar-header{
+    @include gradient(#a3cb38,#1b8135, 0%, 100%);
+    color: $white;
+    min-height: 50px;
+
+    a, a:hover{ color: $white; font-weight: bold;}
+}
+
+.movistar-separador{
+    margin: 5px 0 0 0px;
+    width: 330px;
+    background-image: url('../img/linea_separadora.png');
+    background-repeat: no-repeat;
+    min-height: 45px;
+}
+
+.logo-qin{
+    margin-top: rem-calc(7px);
+    margin-left: rem-calc(10px);
+    height: rem-calc(30px);
+}

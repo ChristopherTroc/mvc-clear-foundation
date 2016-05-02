@@ -1,0 +1,14 @@
+.white-panel {
+  @include panel(
+    $bg:#FFF,
+    $adjust:true
+  );
+}
+
+.white-panel-25 {
+  @include panel(
+    $bg:#FFF,
+    $padding: 25px,
+    $adjust:true
+  );
+}
