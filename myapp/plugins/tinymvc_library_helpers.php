@@ -3,7 +3,7 @@
 /***
  * Name: Helpers
  * Owner: C-troc
- * Description: This plugins have a lot of tools to manage app
+ * Description: This plugins have a lot of tools to manage your app
  * Modules:   - url_dispatcher
  *            - foundations 5 css and js librarys
  *            - jquery
@@ -12,31 +12,34 @@
  *            - razorflow library charts
  *            - Manage Sessions functions
  *            - php mailer
- *            - and many anotheers litles functions to help you
+ *            - and many others litles functions to help you
  ***/
+
 
 class TinyMVC_Library_Helpers {
 
+  var $app_name;
   var $server_name;
   var $folder_name;
   var $base_url;
 
   function __construct(){
- 
+
    /***  set principal routes apps and globals vars class */
 
-   $this->name_app = "Your name app";
+   $this->app_name = "Your name app";
    //$this->server_name = $_SERVER['SERVER_NAME'];
    $this->server_name = "192.168.2.123";
    $this->folder_name = "minutrade";
    $this->base_url = "http://$this->server_name/$this->folder_name"; // this for work on local host
    //$this->base_url = "http://$this->server_name";                  // this for work on Server
-  
 
   }
 
 
-//**************************************************************   Url functions ************************************************************************************
+  
+  //**************************************************************   Url functions ************************************************************************************
+
 
 
 
@@ -80,6 +83,7 @@ class TinyMVC_Library_Helpers {
      case 'renew_password'      : return "$this->base_url/login/renew_password";
 
      //Main menu (here your menu)
+     case 'try' : return "$this->base_url/try";
 
 
     }
@@ -138,6 +142,7 @@ class TinyMVC_Library_Helpers {
 
 
 
+
   function secure_session_start(){
     
     $session_name = 'secure_session';
@@ -168,6 +173,8 @@ class TinyMVC_Library_Helpers {
   
   
   //************************************************ e-mails functions **************************************************************************************
+
+
 
 
   function php_mailer(){
@@ -201,186 +208,34 @@ class TinyMVC_Library_Helpers {
   }
 
   function send_notification_user($user){
-
-    $email_body='
-      <!DOCTYPE html>
-          <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head>
-          <body style="font-family: Helvetica, Arial, Sans-Serif;">
-	        <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
-	            <tr>
-		              <td align="left" valign="top">
-		                  <table border="0" cellpadding="20" cellspacing="0" width="720" id="emailContainer">
-		                      <tr>
-		                          <td align="left" valign="top">
-		                              <table border="0" cellpadding="10" cellspacing="0" width="100%" style="background-color:#9bb540; color:#FFF;">
-		                                  <tr>
-		                                      <td align="left" valign="top">
-		                                          Bienvenido a '.$this->name_app.'
-		                                      </td>
-		                                  </tr>
-		                              </table>
-		                          </td>
-		                      </tr>
-		                      <tr>
-		                          <td align="left" valign="top">
-		                              <table border="0" cellpadding="0" cellspacing="0" width="70%" id="emailBody">
-		                                  <tr>
-		                                      <td align="left" valign="top">
-		                                          Nombre de usuario:
-		                                      </td>
-                                          <td align="left" valign="top" style="background-color:#9bb540; color:#FFF; padding:2px;">
-		                                          '.$user[user_login].'
-		                                      </td>
-		                                  </tr>
-                                      <tr>
-		                                      <td align="left" valign="top">
-		                                          Password:
-		                                      </td>
-                                          <td align="left" valign="top" style="background-color:#9bb540; color:#FFF; padding:2px;">
-		                                          '.$user[pass].'
-		                                      </td>
-		                                  </tr>
-		                              </table>
-		                          </td>
-		                      </tr>
-		                      <tr>
-		                          <td align="left" valign="top">
-		                              <table border="0" cellpadding="0" cellspacing="0" width="100%" id="emailFooter">
-		                                  <tr>
-		                                      <td align="left" valign="top">
-		                                          Para poder hacer uso del sistema, debes activar tu Cuenta de usuario haciendo click en el siguiente link:
-                                              <a href="'.$this->to('activate_user_account').'?id='.$user[id].'&key='.$user['key'].'"><strong>Activar Cuenta de Usuario</strong></a>
-		                                      </td>
-		                                  </tr>
-		                              </table>
-		                          </td>
-		                      </tr>
-		                  </table>
-		              </td>
-	            </tr>
-	        </table>
-       </body>
-    </html>';
-    
-
-    $info = array('email' => $user[user_login], 'subject' => 'Bienvenido a '.$this->name_app.' Administrador', 'email_body' => $email_body);
+    require('emails_views/send_notification_view.php');
+    $info = array('email' => $user[user_login], 'subject' => 'Bienvenido a '.$this->app_name.' Administrador', 'email_body' => $email_body);
     $this->mailer($info);
     return;
   }
   
   function send_recovery_password_email($user){
-    $email_body='
-      <!DOCTYPE html>
-          <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head>
-          <body style="font-family: Helvetica, Arial, Sans-Serif;">
-	        <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
-	            <tr>
-		              <td align="left" valign="top">
-		                  <table border="0" cellpadding="20" cellspacing="0" width="720" id="emailContainer">
-		                      <tr>
-		                          <td align="left" valign="top">
-		                              <table border="0" cellpadding="10" cellspacing="0" width="100%" id="emailHeader" style="background-color:#9bb540; color:#FFF;">
-		                                  <tr>
-		                                      <td align="left" valign="top">
-		                                          Recuperación de password, '.$this->name_app.' Administrador
-		                                      </td>
-		                                  </tr>
-		                              </table>
-		                          </td>
-		                      </tr>
-		                      <tr>
-		                          <td align="left" valign="top">
-		                              <table border="0" cellpadding="0" cellspacing="0" width="100%" id="emailBody">
-		                                  <tr>
-		                                      <td align="left" valign="top">
-                                              Has solicitado recuperar tu password de usuario, has click en el siguiente enlace: </br>
-                                              <a href="'.$this->to('renew_password').'?id='.$user[id].'&key='.$user[activation_key].'"><strong>Recuperar Password</strong></a>
-                                          </td>
-                                      </tr>
-		                              </table>
-		                          </td>
-		                      </tr>
-		                      <tr>
-		                          <td align="left" valign="top">
-		                              <table border="0" cellpadding="0" cellspacing="0" width="100%" id="emailFooter">
-		                                  <tr>
-                                          <td align="left" valign="top">
-                                              En caso que no hallas solicitado la recuperación de password, omita este email. y notifique esta situación a <a href="mailto:ctroc@qin.cl" >ctroc@qin.cl</a>
-		                                      </td>
-		                                  </tr>
-		                              </table>
-		                          </td>
-		                      </tr>
-		                  </table>
-		              </td>
-	            </tr>
-	        </table>
-       </body>
-    </html>';
-
-    $info = array('email' => $user[login], 'subject' => 'Recuperacion de password, Minutrade Administrador.', 'email_body' => $email_body);
+    require('emails_views/send_recovery_password_view.php');
+    $info = array('email' => $user[login], 'subject' => 'Recuperacion de password,'.$this->app_name.'', 'email_body' => $email_body);
     $this->mailer($info);
     return;
 
    }
   
   function send_new_password_email($user,$password){
-    $email_body='
-      <!DOCTYPE html>
-          <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head>
-          <body style="font-family: Helvetica, Arial, Sans-Serif;">
-	        <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
-	            <tr>
-		              <td align="left" valign="top">
-		                  <table border="0" cellpadding="20" cellspacing="0" width="720" id="emailContainer">
-		                      <tr>
-		                          <td align="left" valign="top">
-		                              <table border="0" cellpadding="10" cellspacing="0" width="100%" id="emailHeader" style="background-color:#9bb540; color:#FFF;">
-		                                  <tr>
-		                                      <td align="left" valign="top">
-		                                          Tu nuevo password, '.$this->name_app.' Administrador
-		                                      </td>
-		                                  </tr>
-		                              </table>
-		                          </td>
-		                      </tr>
-		                      <tr>
-		                          <td align="left" valign="top">
-		                              <table border="0" cellpadding="0" cellspacing="0" width="100%" id="emailBody">
-		                                  <tr>
-                                          <td align="left" valign="top">
-                                              Has recuperado tu password, tu nuevo password es: <span style="background-color:#9bb540; color:#FFF; padding:2px;">'.$password.'</span>
-                                          </td>
-                                      </tr>
-		                              </table>
-		                          </td>
-		                      </tr>
-		                      <tr>
-		                          <td align="left" valign="top">
-		                              <table border="0" cellpadding="0" cellspacing="0" width="100%" id="emailFooter">
-		                                  <tr>
-                                          <td align="left" valign="top">
-                                              <a href="'.$this->to('home').'"><strong>Iniciar Sesión</strong></a>
-		                                      </td>
-		                                  </tr>
-		                              </table>
-		                          </td>
-		                      </tr>
-		                  </table>
-		              </td>
-	            </tr>
-	        </table>
-       </body>
-    </html>';
-     
-
-    $info = array('email' => $user[login], 'subject' => 'Tu nuevo password, '.$this->name_app.' Administrador.', 'email_body' => $email_body);
+    require('emails_views/send_new_password_view.php');
+    $info = array('email' => $user[login], 'subject' => 'Tu nuevo password, '.$this->app_name.' Administrador.', 'email_body' => $email_body);
     $this->mailer($info);
     return;
+  }
+  
+  
+  
+
+  //************************************************ Others helpers functions **************************************************************************************
+
 
   
-  }
-
 
   function check_extension($name_file, $extensions = array('.jpg', '.pdf', '.doc', '.docx')){
     $ext = $this->get_extencion_file($name_file);
@@ -399,7 +254,7 @@ class TinyMVC_Library_Helpers {
   }
 
   function clean_spaces($string){
-    $clean = ereg_replace( "([ ]+)", "", $string );
+    $clean = preg_replace( "([ ]+)", "", $string);
     return $clean;
   }
     
@@ -418,7 +273,7 @@ class TinyMVC_Library_Helpers {
   
 
 
-  //Deslete directory complete (recursive funcntion)
+  //Delete directory complete (recursive funcntion)
   function deleteDirectory($dir) {
     if(!$dh = @opendir($dir)) return;
         while (false !== ($current = readdir($dh))) {
