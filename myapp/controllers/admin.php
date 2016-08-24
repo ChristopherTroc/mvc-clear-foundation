@@ -22,7 +22,7 @@ class Admin_Controller extends TinyMVC_Controller {
     $this->view->assign('stylesheets',   array($this->helpers->load_css()));
     $this->view->assign('javascripts',   array($this->helpers->load_javascript('header')));
     $this->view->assign('javascripts_ft',array($this->helpers->load_javascript('footer')));
-    $this->view->assign('title','Minutrade Movistar');
+    $this->view->assign('title','MVC Clear');
     $this->view->assign('helper',$this->helpers);
     $this->view->display('header');
     if($_GET[success]) $this->view->display('success');

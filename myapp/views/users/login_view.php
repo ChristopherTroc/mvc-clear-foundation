@@ -10,7 +10,7 @@
                     <div class="large-5 large-offset-1 end columns">
                         <div class="row">
                             <div class="large-12 columns">
-                                <h4>Minutrade Portal de Administración</h4>
+                                <h4>Portal de Administración</h4>
                                 <a href="#" data-reveal-id="forget-password" class="large-offset-6" >¿olvido su password?</a>
                                 <form method="post" action="<?$helper->urldispatch('login')?>" data-abide >
                                     <div class="row">

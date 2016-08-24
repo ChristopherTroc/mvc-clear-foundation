@@ -23,14 +23,12 @@ if(!defined('TMVC_MYAPPDIR'))
 set_include_path(get_include_path()
   . PATH_SEPARATOR . TMVC_MYAPPDIR . 'controllers' . DS
   . PATH_SEPARATOR . TMVC_MYAPPDIR . 'controllers/users' . DS
-  . PATH_SEPARATOR . TMVC_MYAPPDIR . 'controllers/administration' . DS
   . PATH_SEPARATOR . TMVC_MYAPPDIR . 'models' . DS
   . PATH_SEPARATOR . TMVC_MYAPPDIR . 'configs' . DS
   . PATH_SEPARATOR . TMVC_MYAPPDIR . 'plugins' . DS
   . PATH_SEPARATOR . TMVC_MYAPPDIR . 'views' . DS
   . PATH_SEPARATOR . TMVC_MYAPPDIR . 'views/default' . DS
   . PATH_SEPARATOR . TMVC_MYAPPDIR . 'views/users' . DS
-  . PATH_SEPARATOR . TMVC_MYAPPDIR . 'views/administration' . DS
   . PATH_SEPARATOR . TMVC_BASEDIR . 'sysfiles' . DS . 'controllers' . DS
   . PATH_SEPARATOR . TMVC_BASEDIR . 'sysfiles' . DS . 'models' . DS
   . PATH_SEPARATOR . TMVC_BASEDIR . 'sysfiles' . DS . 'configs' . DS
