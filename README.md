@@ -1,9 +1,9 @@
 <h4>Litle MVC framework PHP</h4>
 
-<p> This a fork of tinymvs framework with a administration module (users,privileges functions) </p>
-<p>Others modules on view and back: <br><br>
+<p> This a fork of tinymvc framework with a administration module (users,privileges functions) </p>
+<p> <h5>Others modules on view and back:</h5> <br><br>
 
-  Modules: <br> - url_dispatcher<br>
+  Modules: <br> - url dispatcher<br>
                 - foundations 5 css and js librarys<br>
                 - jquery <br>
                 - jquery datatables <br>
