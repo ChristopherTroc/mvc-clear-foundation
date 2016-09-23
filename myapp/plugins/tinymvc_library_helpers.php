@@ -30,7 +30,7 @@ class TinyMVC_Library_Helpers {
    $this->app_name = "Your name app";
    //$this->server_name = $_SERVER['SERVER_NAME'];
    $this->server_name = "192.168.2.123";
-   $this->folder_name = "minutrade";
+   $this->folder_name = "your_folder_app";
    $this->base_url = "http://$this->server_name/$this->folder_name"; // this for work on local host
    //$this->base_url = "http://$this->server_name";                  // this for work on Server
 
@@ -240,7 +240,6 @@ class TinyMVC_Library_Helpers {
   function check_extension($name_file, $extensions = array('.jpg', '.pdf', '.doc', '.docx')){
     $ext = $this->get_extencion_file($name_file);
      if(!in_array($ext,$extensions)){
-         echo "Here"; exit;
          return false;
       }
       
